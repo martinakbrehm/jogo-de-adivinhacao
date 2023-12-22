@@ -1,4 +1,9 @@
+const screen1 = document.querySelector(".screen1")
+const screen2 = document.querySelector(".screen2")
 const randomNumber = Math.round(Math.random() * 10)
+
+const btnTry = document.querySelector("#btnTry")
+const btnReset = document.querySelector("#btnReset")
 let xAttempts = 1
 
 
@@ -7,8 +12,7 @@ function handleTryClick(event) {
     const inputNumber = document.querySelector("#inputNumber")
 
     if(Number(inputNumber.value) == randomNumber) {
-        document.querySelector(".screen1").classList.add("hide")
-        document.querySelector(".screen2").classList.remove("hide")
+        toggleScreen()
         document.querySelector(".screen2 h2").innerText = `Acertou em ${xAttempts} tentativas`
 
     }
@@ -17,14 +21,18 @@ function handleTryClick(event) {
     xAttempts++
 }
 
+function handleResetClick() {
+    toggleScreen()
+    xAttempts = 1
+}
+
+function toggleScreen() {
+    screen1.classList.toggle("hide")
+    screen2.classList.toggle("hide")
+}
+
 //Eventos
-const btnTry = document.querySelector("#btnTry")
-const btnReset = document.querySelector("#btnReset")
 
 btnTry.addEventListener('click', handleTryClick)
 
-btnReset.addEventListener('click', function(){
-    document.querySelector(".screen1").classList.remove("hide")
-    document.querySelector(".screen2").classList.add("hide")
-    xAttempts = 1
-})
+btnReset.addEventListener('click', handleResetClick)
